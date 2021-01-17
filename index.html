@@ -4,16 +4,21 @@
   <meta charset="utf-8">
 
 
-    <!--404 error fix-->
-    <script>
-      (function(){
-        var redirect = sessionStorage.redirect;
-        delete sessionStorage.redirect;
-        if (redirect && redirect != location.href) {
-          history.replaceState(null, null, redirect);
-        }
-      })();
-    </script>
+  <!-- Github Pages hack to allow SPA refresh without receiving 404. -->
+  <script>
+    (function () {
+      // Retrieve the URL the user was trying to access when receiving the 404.
+      var redirect = sessionStorage.redirect;
+      // Remove the URL from sessionStorage.
+      delete sessionStorage.redirect;
+      // Check if we actually need to redirect.
+      if (redirect && redirect != location.href) {
+        // We need to redirect to the URL the user was trying to access.
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
+  <!-- /Github Pages hack. -->
 
 
   <title>gpsshooter.com</title>
@@ -33,7 +38,7 @@
 
 
 </head>
-<body id="home">
+<body>
   <app-root></app-root>
 <script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body>
 </html>
